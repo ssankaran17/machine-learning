@@ -39,6 +39,20 @@ class Perceptron:
         # Then return 0 or 1 depending on strength compared to threshold  
         return int(strength > self.threshold)
     
+    def update(self, values, train, eta=.1):
+        """
+        Takes in a 2D array @param values consisting of a LIST of inputs and a
+        1D array @param train, consisting of a corresponding list of expected
+        outputs. Updates internal weights according to the perceptron training
+        rule using these values and an optional learning rate, @param eta.
+        """
+        for i in range(len(values)):
+            x, y = values[i], train[i]
+            y_pred = self.activate(x)
+            for j in range(len(x)):
+                self.weights[j] += (y - y_pred) * eta * x[j]
+                
+    
     def test():
     """
     A few tests to make sure that the perceptron class performs as expected.
